@@ -1,0 +1,47 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Review Status</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <textarea name="review_text" id="review-text" rows="4" cols="50">{{ review_text }}</textarea>
+        <br>
+        <input type="submit" value="Check Review">
+        <button type="button" id="random-button">Random</button>
+    </form>
+
+    <h3>Review Status: {{ sentiment }}</h3>
+    <h3>Review Rating: {{ rating }}</h3>
+
+    <script>
+        var reviews = [
+            "This movie was fantastic!",
+            "I didn't enjoy the movie at all.",
+            "Great film with amazing performances.",
+            "Waste of time and money.",
+            "The best movie I've seen in years!",
+            "Terrible plot and acting.",
+            "Highly recommended, must-watch movie.",
+            "Not worth watching.",
+            "Incredible special effects!",
+            "I couldn't understand the story.",
+            "A masterpiece of cinema.",
+            "I regret watching it.",
+            "An average movie with some good moments.",
+            "One of the worst movies I've ever seen."
+        ];
+
+        document.getElementById('random-button').addEventListener('click', function() {
+            var randomIndex = Math.floor(Math.random() * reviews.length);
+            document.getElementById('review-text').value = reviews[randomIndex];
+        });
+    </script>
+</body>
+</html>
+
